@@ -1,10 +1,11 @@
 .container {
   margin-top: 50px;
-  padding: 20px 0px;
+  padding: 40px 0;
   display: flex;
-  align-items: center;
+  align-items: flex-start;
   justify-content: space-between;
-  color: var(--softTextColor);
+  color: var(--muted);
+  border-top: 1px solid #e5e7eb;
 }
 
 .info {
@@ -17,28 +18,31 @@
 .logo {
   display: flex;
   align-items: center;
-  gap: 10px;
+  gap: 12px;
 }
 
 .logoText {
-  font-size: 24px;
+  font-size: 26px;
+  font-weight: 700;
 }
 
 .desc {
   font-weight: 300;
+  max-width: 520px;
 }
 
 .icons {
   margin-top: 10px;
   display: flex;
-  gap: 10px;
+  gap: 12px;
 }
 
 .links {
   flex: 1;
   display: flex;
   justify-content: flex-end;
-  gap: 100px;
+  gap: 80px;
+  flex-wrap: wrap;
 }
 
 .list {
@@ -49,18 +53,20 @@
 }
 
 .listTitle {
-  font-weight: bold;
+  font-weight: 700;
+  color: var(--textColor);
 }
 
 @media screen and (max-width: 1024px) {
   .links {
-    gap: 50px;
+    gap: 40px;
   }
 }
+
 @media screen and (max-width: 768px) {
   .container {
     flex-direction: column;
-    gap: 50px;
+    gap: 32px;
   }
 
   .links {
@@ -68,8 +74,10 @@
     justify-content: space-between;
   }
 }
+
 @media screen and (max-width: 640px) {
   .links {
     font-size: 14px;
+    gap: 24px;
   }
 }

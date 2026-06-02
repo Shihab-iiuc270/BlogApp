@@ -1,20 +1,38 @@
 .container {
   flex: 2;
   margin-top: 60px;
+  background: var(--surface);
+  border-radius: 28px;
+  padding: 28px;
+  box-shadow: var(--shadow);
 }
 
 .subtitle {
-  color: gray;
-  font-size: 16px;
-  font-weight: 400;
-}
-.title {
-  font-size: 28px;
+  color: var(--muted);
+  font-size: 14px;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
 }
 
+.title {
+  font-size: 24px;
+  margin-bottom: 24px;
+}
 
 @media screen and (max-width: 1024px) {
   .container {
-    display: none;
+    margin-top: 40px;
+    width: 100%;
+  }
+}
+
+@media screen and (max-width: 640px) {
+  .container {
+    padding: 20px;
+  }
+
+  .title {
+    font-size: 20px;
   }
 }

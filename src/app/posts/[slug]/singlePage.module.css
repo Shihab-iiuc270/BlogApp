@@ -1,28 +1,41 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  gap: 36px;
+  padding: 40px 0;
+}
+
 .infoContainer {
   display: flex;
-  align-items: center;
-  gap: 50px;
+  align-items: flex-start;
+  gap: 40px;
+  flex-wrap: wrap;
 }
 
 .textContainer {
   flex: 1;
+  min-width: 280px;
 }
 
 .title {
-  font-size: 64px;
-  margin-bottom: 50px;
+  font-size: 48px;
+  line-height: 1.05;
+  margin-bottom: 24px;
 }
 
 .user {
   display: flex;
   align-items: center;
-  gap: 20px;
+  gap: 18px;
+  flex-wrap: wrap;
 }
 
 .userImageContainer {
-  width: 50px;
-  height: 50px;
+  width: 58px;
+  height: 58px;
   position: relative;
+  border-radius: 50%;
+  overflow: hidden;
 }
 
 .avatar {
@@ -33,19 +46,23 @@
 .userTextContainer {
   display: flex;
   flex-direction: column;
-  gap: 5px;
-  color: var(--softTextColor);
+  gap: 4px;
+  color: var(--muted);
 }
 
 .username {
-  font-size: 20px;
-  font-weight: 500;
+  font-size: 18px;
+  font-weight: 600;
 }
 
 .imageContainer {
   flex: 1;
-  height: 350px;
+  min-width: 320px;
+  height: 320px;
   position: relative;
+  border-radius: 28px;
+  overflow: hidden;
+  box-shadow: var(--shadow);
 }
 
 .image {
@@ -54,41 +71,53 @@
 
 .content {
   display: flex;
-  gap: 50px;
+  gap: 40px;
+  flex-wrap: wrap;
 }
 
 .post {
   flex: 5;
-  margin-top: 60px;
+  margin-top: 0;
+}
+
+.description {
+  font-size: 18px;
+  color: var(--softTextColor);
+  line-height: 1.8;
 }
 
 .description p {
-  font-size: 20px;
-  font-weight: 300;
-  margin-bottom: 20px;
+  margin-bottom: 22px;
 }
 
-@media screen and (max-width: 1536px) {
-  .title {
-    font-size: 54px;
-  }
-}
-@media screen and (max-width: 1280px) {
-  .title {
-    font-size: 48px;
-  }
-}
 @media screen and (max-width: 1024px) {
+  .content {
+    flex-direction: column;
+  }
+
   .imageContainer {
-    display: none;
+    width: 100%;
+    min-width: auto;
+    display: block;
   }
 }
-@media screen and (max-width: 640px) {
+
+@media screen and (max-width: 768px) {
   .title {
     font-size: 36px;
   }
 
-  .description p{
-    font-size: 18px;
+  .infoContainer {
+    gap: 24px;
+  }
+}
+
+@media screen and (max-width: 640px) {
+  .title {
+    font-size: 30px;
+  }
+
+  .description {
+    font-size: 16px;
   }
 }

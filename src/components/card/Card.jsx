@@ -13,11 +13,11 @@ export default function Card({key,item}) {
             <span className={styles.date}>{item.createdAt.substring(0,10)} - </span>
             <span className={styles.category}>{item.catSlug}</span>
         </div>
-        <Link  href={`/posts/${item.slug}`} >
-        <h1>{item.title}</h1>
+        <Link href={`/posts/${item.slug}` }>
+          <h1 className={styles.title}>{item.title}</h1>
         </Link>
-        <p  className={styles.desc}>{item.desc.substring(0,60)}</p>
-      <Link  className={ styles.link} href={`/posts/${item.slug}`}>Read More</Link >
+        <p className={styles.desc}>{item.desc.substring(0,60)}</p>
+        <Link className={styles.link} href={`/posts/${item.slug}`}>Read More</Link>
       </div>
     </div>
   )

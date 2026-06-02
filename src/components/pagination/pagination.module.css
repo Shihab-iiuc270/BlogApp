@@ -1,18 +1,26 @@
 .container {
   display: flex;
-  justify-content: space-between;
+  justify-content: center;
+  gap: 16px;
+  margin-top: 24px;
 }
 
 .button {
-  width: 100px;
+  min-width: 120px;
   border: none;
-  padding: 16px;
-  background-color: crimson;
+  padding: 14px 18px;
+  background-color: var(--accent);
   color: white;
   cursor: pointer;
+  border-radius: 999px;
+  transition: transform 200ms ease, background 200ms ease;
 }
 
-.button:disabled{
-  background-color: rgba(220, 20, 60, 0.473);
+.button:hover:not(:disabled) {
+  transform: translateY(-1px);
+}
+
+.button:disabled {
+  background-color: rgba(37, 99, 235, 0.35);
   cursor: not-allowed;
 }

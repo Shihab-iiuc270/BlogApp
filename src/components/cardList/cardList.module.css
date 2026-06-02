@@ -1,7 +1,15 @@
-.container{
-    flex: 5;
+.container {
+  flex: 5;
 }
 
-.title{
-    
+.title {
+  font-size: 32px;
+  margin-bottom: 24px;
+  font-weight: 700;
+}
+
+.posts {
+  display: flex;
+  flex-direction: column;
+  gap: 28px;
 }

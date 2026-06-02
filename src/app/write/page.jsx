@@ -25,40 +25,53 @@ const WritePage = () => {
   const [value, setValue] = useState("");
   const [title, setTitle] = useState("");
   const [catSlug, setCatSlug] = useState("");
+  const [isUploading, setIsUploading] = useState(false);
+  const [uploadError, setUploadError] = useState("");
+
+  const uploadToCloudinary = async (file) => {
+    const formData = new FormData();
+
+    formData.append("file", file);
+    formData.append(
+      "upload_preset",
+      process.env.NEXT_PUBLIC_CLOUDINARY_UPLOAD_PRESET
+    );
+
+    const res = await fetch(
+      `https://api.cloudinary.com/v1_1/${process.env.NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME}/auto/upload`,
+      {
+        method: "POST",
+        body: formData,
+      }
+    );
+
+    if (!res.ok) {
+      throw new Error("Upload failed");
+    }
+
+    const data = await res.json();
+    return data.secure_url;
+  };
 
   useEffect(() => {
-    // const storage = getStorage(app);
-    const upload = () => {
-      const name = new Date().getTime() + file.name;
-      const storageRef = ref(storage, name);
-
-      const uploadTask = uploadBytesResumable(storageRef, file);
-
-      uploadTask.on(
-        "state_changed",
-        (snapshot) => {
-          const progress =
-            (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
-          console.log("Upload is " + progress + "% done");
-          switch (snapshot.state) {
-            case "paused":
-              console.log("Upload is paused");
-              break;
-            case "running":
-              console.log("Upload is running");
-              break;
-          }
-        },
-        (error) => {},
-        () => {
-          getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) => {
-            setMedia(downloadURL);
-          });
-        }
-      );
+    const upload = async () => {
+      try {
+        setIsUploading(true);
+        setUploadError("");
+        const url = await uploadToCloudinary(file);
+        setMedia(url);
+        console.log("Uploaded:", url);
+      } catch (err) {
+        console.log(err);
+        setUploadError("Failed to upload image. Please try again.");
+      } finally {
+        setIsUploading(false);
+      }
     };
 
-    file && upload();
+    if (file) {
+      upload();
+    }
   }, [file]);
 
   if (status === "loading") {
@@ -78,20 +91,37 @@ const WritePage = () => {
       .replace(/^-+|-+$/g, "");
 
   const handleSubmit = async () => {
-    const res = await fetch("/api/posts", {
-      method: "POST",
-      body: JSON.stringify({
-        title,
-        desc: value,
-        img: media,
-        slug: slugify(title),
-        catSlug: catSlug || "style", //If not selected, choose the general category
-      }),
-    });
+    if (!title.trim()) {
+      alert("Please enter a title");
+      return;
+    }
 
-    if (res.status === 200) {
-      const data = await res.json();
-      router.push(`/posts/${data.slug}`);
+    if (!value.trim()) {
+      alert("Please write some content");
+      return;
+    }
+
+    try {
+      const res = await fetch("/api/posts", {
+        method: "POST",
+        body: JSON.stringify({
+          title,
+          desc: value,
+          img: media,
+          slug: slugify(title),
+          catSlug: catSlug || "style",
+        }),
+      });
+
+      if (res.status === 200) {
+        const data = await res.json();
+        router.push(`/posts/${data.slug}`);
+      } else {
+        alert("Failed to publish post");
+      }
+    } catch (err) {
+      console.log(err);
+      alert("Error publishing post");
     }
   };
 
@@ -111,6 +141,38 @@ const WritePage = () => {
         <option value="travel">travel</option>
         <option value="coding">coding</option>
       </select>
+
+      {/* Image Preview Section */}
+      {media && (
+        <div className={styles.imagePreviewContainer}>
+          <div className={styles.imagePreview}>
+            <Image src={media} alt="Preview" fill className={styles.previewImage} />
+          </div>
+          <button
+            className={styles.removeButton}
+            onClick={() => {
+              setMedia("");
+              setFile(null);
+            }}
+          >
+            Remove Image
+          </button>
+        </div>
+      )}
+
+      {/* Upload Status */}
+      {isUploading && (
+        <div className={styles.uploadStatus}>
+          <span>Uploading image...</span>
+        </div>
+      )}
+
+      {uploadError && (
+        <div className={styles.uploadError}>
+          {uploadError}
+        </div>
+      )}
+
       <div className={styles.editor}>
         <button className={styles.button} onClick={() => setOpen(!open)}>
           <Image src="/plus.png" alt="" width={16} height={16} />
@@ -122,8 +184,9 @@ const WritePage = () => {
               id="image"
               onChange={(e) => setFile(e.target.files[0])}
               style={{ display: "none" }}
+              accept="image/*"
             />
-            <button className={styles.addButton}>
+            <button className={styles.addButton} disabled={isUploading}>
               <label htmlFor="image">
                 <Image src="/image.png" alt="" width={16} height={16} />
               </label>
@@ -144,8 +207,8 @@ const WritePage = () => {
           placeholder="Tell your story..."
         />
       </div>
-      <button className={styles.publish} onClick={handleSubmit}>
-        Publish
+      <button className={styles.publish} onClick={handleSubmit} disabled={isUploading}>
+        {isUploading ? "Uploading..." : "Publish"}
       </button>
     </div>
   );

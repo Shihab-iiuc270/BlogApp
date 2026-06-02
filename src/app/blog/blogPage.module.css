@@ -1,12 +1,31 @@
-.title{
-  background-color: coral;
-  color: white;
-  padding: 5px 10px;
-  text-align: center;
-  text-transform: capitalize;
+.container {
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+  padding-top: 20px;
 }
 
-.content{
+.title {
+  background: var(--accent);
+  color: white;
+  padding: 10px 18px;
+  text-align: center;
+  text-transform: capitalize;
+  border-radius: 999px;
+  width: fit-content;
+  font-size: 20px;
+  font-weight: 700;
+}
+
+.content {
   display: flex;
-  gap: 50px;
+  gap: 40px;
+  align-items: flex-start;
+  flex-wrap: wrap;
+}
+
+@media screen and (max-width: 1024px) {
+  .content {
+    flex-direction: column;
+  }
 }
