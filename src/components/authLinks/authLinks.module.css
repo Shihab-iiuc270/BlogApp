@@ -1,5 +1,7 @@
 .link {
   cursor: pointer;
+  font-size: 14px;
+  white-space: nowrap;
 }
 
 .burger {
@@ -18,20 +20,20 @@
 }
 
 .responsiveMenu {
-  position: absolute;
-  top: 100px;
+  position: fixed;
+  top: 60px;
   left: 0;
+  right: 0;
   background-color: var(--surface);
-  height: calc(100vh - 100px);
-  width: 100%;
-  display: flex;
+  display: none;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  gap: 28px;
-  font-size: 22px;
+  gap: 20px;
+  font-size: 18px;
   z-index: 999;
-  padding: 24px;
+  padding: 20px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
 }
 
 .responsiveMenu a,

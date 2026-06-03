@@ -6,21 +6,19 @@ const Featured = () => {
   return (
     <div className={styles.container}>
       <h1 className={styles.title}>
-        <b>Hey, lama dev here!</b> Discover my stories and creative ideas.
+        <b>Welcome to BlogApp</b> Share your stories, ideas and experiences with the world
       </h1>
       <div className={styles.post}>
         <div className={styles.imgContainer}>
-          <Image src="/p1.jpeg" alt="" fill className={styles.image} />
+          <Image src="/p1.jpeg" alt="Featured story" fill className={styles.image} />
         </div>
         <div className={styles.textContainer}>
-          <h1 className={styles.postTitle}>Lorem ipsum dolor sit amet alim consectetur adipisicing elit.</h1>
+          <h1 className={styles.postTitle}>Discover Amazing Stories and Insights from Our Community</h1>
           <p className={styles.postDesc}>
-            Lorem ipsum dolor sit, amet consectetur adipisicing elit.
-            Cupiditate, quam nisi magni ea laborum inventore voluptatum
-            laudantium repellat ducimus unde aspernatur fuga. Quo, accusantium
-            quisquam! Harum unde sit culpa debitis.
+            Join thousands of readers exploring diverse topics from technology and design to lifestyle and creativity. 
+            Our community of writers shares authentic experiences and valuable knowledge that can inspire and transform your perspective.
           </p>
-          <button className={styles.button}>Read More</button>
+          <button className={styles.button}>Explore More</button>
         </div>
       </div>
     </div>

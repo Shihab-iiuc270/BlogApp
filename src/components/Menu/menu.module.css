@@ -1,6 +1,7 @@
 .container {
-  flex: 2;
-  margin-top: 60px;
+  flex: 1;
+  width: 100%;
+  margin-top: 40px;
   background: var(--surface);
   border-radius: 28px;
   padding: 28px;
@@ -9,15 +10,17 @@
 
 .subtitle {
   color: var(--muted);
-  font-size: 14px;
-  font-weight: 500;
+  font-size: 12px;
+  font-weight: 600;
   text-transform: uppercase;
-  letter-spacing: 0.12em;
+  letter-spacing: 0.14em;
+  margin-bottom: 10px;
 }
 
 .title {
-  font-size: 24px;
-  margin-bottom: 24px;
+  font-size: 22px;
+  margin-bottom: 20px;
+  line-height: 1.2;
 }
 
 @media screen and (max-width: 1024px) {

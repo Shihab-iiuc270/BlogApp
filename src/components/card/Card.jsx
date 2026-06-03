@@ -3,8 +3,10 @@ import styles from "./card.module.css"
 import Image from 'next/image'
 import Link from 'next/link'
 export default function Card({key,item}) {
+  const plainDesc = item.desc ? item.desc.replace(/<[^>]*>/g, "") : "";
+
   return (
-    <div className={styles.container} key={key}> 
+    <div className={styles.container} key={key}>
      {item.img && ( <div className={styles.imageContainer}>
        <Image src={item.img}  alt='' fill  className={ styles.image}/>
       </div>)}
@@ -16,7 +18,7 @@ export default function Card({key,item}) {
         <Link href={`/posts/${item.slug}` }>
           <h1 className={styles.title}>{item.title}</h1>
         </Link>
-        <p className={styles.desc}>{item.desc.substring(0,60)}</p>
+        <p className={styles.desc}>{plainDesc.substring(0, 110)}</p>
         <Link className={styles.link} href={`/posts/${item.slug}`}>Read More</Link>
       </div>
     </div>

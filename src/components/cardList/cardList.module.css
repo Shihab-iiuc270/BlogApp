@@ -1,15 +1,16 @@
 .container {
-  flex: 5;
+  width: 100%;
+  min-width: 0;
 }
 
 .title {
-  font-size: 32px;
-  margin-bottom: 24px;
+  font-size: 26px;
+  margin-bottom: 16px;
   font-weight: 700;
 }
 
 .posts {
   display: flex;
   flex-direction: column;
-  gap: 28px;
+  gap: 20px;
 }

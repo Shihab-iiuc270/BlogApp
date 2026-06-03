@@ -11,73 +11,57 @@
 .categories {
   display: flex;
   flex-wrap: wrap;
-  justify-content: space-between;
-  gap: 18px;
+  gap: 14px;
 }
 
 .category {
-  display: flex;
+  display: inline-flex;
   align-items: center;
-  gap: 14px;
+  gap: 12px;
   text-transform: capitalize;
-  width: calc(20% - 14px);
-  min-width: 160px;
-  height: 88px;
-  justify-content: center;
-  border-radius: 20px;
+  padding: 14px 20px;
+  border-radius: 999px;
   font-weight: 600;
   color: var(--textColor);
-  transition: transform 200ms ease, box-shadow 200ms ease;
+  transition: transform 200ms ease, box-shadow 200ms ease, background 200ms ease;
+  background: var(--softBg);
   box-shadow: 0 18px 40px rgba(15, 23, 42, 0.06);
+  width: auto;
 }
 
 .category:hover {
-  transform: translateY(-3px);
+  transform: translateY(-2px);
+  background: var(--accentSoft);
 }
 
 .category.style {
-  background-color: #57c4ff22;
+  background-color: rgba(87, 196, 255, 0.18);
 }
 
 .category.fashion {
-  background-color: #da85c722;
+  background-color: rgba(218, 133, 199, 0.14);
 }
 
 .category.food {
-  background-color: #7fb88122;
+  background-color: rgba(127, 184, 129, 0.18);
 }
 
 .category.travel {
-  background-color: #ff795722;
+  background-color: rgba(255, 121, 87, 0.16);
 }
 
 .category.culture {
-  background-color: #ffb04f35;
+  background-color: rgba(255, 176, 79, 0.18);
 }
 
 .category.coding {
-  background-color: #5e4fff22;
+  background-color: rgba(94, 79, 255, 0.18);
 }
 
 .image {
   border-radius: 50%;
 }
 
-@media screen and (max-width: 1280px) {
-  .category {
-    width: calc(25% - 14px);
-  }
-}
-@media screen and (max-width: 1024px) {
-  .category {
-    width: calc(33.33% - 14px);
-  }
-}
-@media screen and (max-width: 768px) {
-  .category {
-    width: calc(50% - 14px);
-  }
-}
 @media screen and (max-width: 640px) {
   .category {
     width: 100%;

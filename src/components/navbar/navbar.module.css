@@ -2,44 +2,49 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: 24px;
-  padding: 24px 0;
+  gap: 16px;
+  padding: 14px 0;
   position: sticky;
   top: 0;
   z-index: 20;
-  background: rgba(255, 255, 255, 0.94);
-  backdrop-filter: blur(14px);
+  background: var(--navBg);
+  backdrop-filter: blur(16px);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
 }
 
 .social {
-  display: flex;
+  display: none;
   gap: 12px;
   flex: 1;
 }
 
 .logo {
-  flex: 1;
+  flex: 0 0 auto;
   text-align: left;
-  font-size: 30px;
+  font-size: 26px;
   font-weight: 700;
   letter-spacing: -0.04em;
+  white-space: nowrap;
 }
 
 .links {
   display: flex;
   align-items: center;
   justify-content: flex-end;
-  gap: 18px;
-  flex: 2;
-  font-size: 16px;
-  flex-wrap: wrap;
+  gap: 12px;
+  flex: 1;
+  font-size: 14px;
+  flex-wrap: nowrap;
+  min-width: 0;
 }
 
 .link {
   color: var(--textColor);
-  padding: 10px 16px;
+  padding: 8px 12px;
   border-radius: 999px;
   transition: background 200ms ease;
+  white-space: nowrap;
+  font-size: 14px;
 }
 
 .link:hover {
@@ -47,28 +52,33 @@
 }
 
 @media screen and (max-width: 1024px) {
-  .social {
-    display: none;
-  }
-
   .container {
-    padding: 18px 0;
+    padding: 14px 0;
   }
 }
 
 @media screen and (max-width: 768px) {
   .logo {
-    font-size: 24px;
+    font-size: 22px;
   }
 
   .links {
-    gap: 12px;
+    gap: 8px;
+  }
+
+  .link {
+    padding: 6px 10px;
+    font-size: 13px;
   }
 }
 
 @media screen and (max-width: 640px) {
+  .logo {
+    font-size: 20px;
+  }
+
   .links {
-    flex: none;
+    gap: 6px;
   }
 
   .link {

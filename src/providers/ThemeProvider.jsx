@@ -5,15 +5,15 @@ import React, { useContext, useEffect, useState } from "react";
 
 const ThemeProvider = ({ children }) => {
   const { theme } = useContext(ThemeContext);
-  const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
-    setMounted(true);
-  }, []);
+    if (theme) {
+      document.documentElement.dataset.theme = theme;
+      document.body.dataset.theme = theme;
+    }
+  }, [theme]);
 
-  if (mounted) {
-    return <div className={theme}>{children}</div>;
-  }
+  return <div className={theme ?? "light"}>{children}</div>;
 };
 
 export default ThemeProvider;

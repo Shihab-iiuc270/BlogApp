@@ -6,21 +6,24 @@
 }
 
 .button {
-  min-width: 120px;
-  border: none;
-  padding: 14px 18px;
-  background-color: var(--accent);
-  color: white;
+  min-width: 110px;
+  border: 1px solid transparent;
+  padding: 12px 24px;
+  background: var(--softBg);
+  color: var(--textColor);
   cursor: pointer;
   border-radius: 999px;
-  transition: transform 200ms ease, background 200ms ease;
+  transition: transform 200ms ease, background 200ms ease, color 200ms ease, border-color 200ms ease;
 }
 
 .button:hover:not(:disabled) {
   transform: translateY(-1px);
+  background: var(--accentSoft);
+  border-color: rgba(37, 99, 235, 0.2);
 }
 
 .button:disabled {
-  background-color: rgba(37, 99, 235, 0.35);
+  background-color: rgba(148, 163, 184, 0.2);
+  color: rgba(148, 163, 184, 0.8);
   cursor: not-allowed;
 }

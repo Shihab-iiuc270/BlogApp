@@ -1,20 +1,43 @@
 .container {
-  width: 40px;
-  height: 20px;
-  border-radius: 50px;
+  width: 62px;
+  height: 32px;
+  border-radius: 999px;
   cursor: pointer;
-  display: flex;
+  position: relative;
+  display: inline-flex;
   align-items: center;
   justify-content: space-between;
-  background-color: black;
-  position: relative;
+  padding: 4px;
+  background: var(--softBg);
+  border: 1px solid rgba(15, 23, 42, 0.12);
+  transition: background 200ms ease, border-color 200ms ease;
 }
 
-.ball{
-  width: 15px;
-  height: 15px;
+.light {
+  background: rgba(255, 255, 255, 0.92);
+}
+
+.dark {
+  background: rgba(255, 255, 255, 0.08);
+  border-color: rgba(148, 163, 184, 0.4);
+}
+
+.ball {
+  width: 18px;
+  height: 18px;
   border-radius: 50%;
-  background-color: white;
+  background-color: var(--surface);
   position: absolute;
-  flex: 1px;
+  top: 50%;
+  transform: translateY(-50%);
+  transition: transform 200ms ease, background 200ms ease;
+  box-shadow: 0 12px 22px rgba(0, 0, 0, 0.14);
+}
+
+.lightBall {
+  transform: translateY(-50%) translateX(0);
+}
+
+.darkBall {
+  transform: translateY(-50%) translateX(28px);
 }

@@ -10,22 +10,14 @@ const ThemeToggle = () => {
 
   return (
     <div
-      className={styles.container}
+      className={`${styles.container} ${theme === "dark" ? styles.dark : styles.light}`}
       onClick={toggle}
-      style={
-        theme === "dark" ? { backgroundColor: "white" } : { backgroundColor: "#0f172a" }
-      }
+      aria-label="Toggle theme"
+      title="Toggle theme"
     >
-      <Image src="/moon.png" alt="" width={14} height={14} />
-      <div
-        className={styles.ball}
-        style={
-          theme === "dark"
-            ? { left: 1, background: "#0f172a" }
-            : { right: 1, background: "white" }
-        }
-      ></div>
-      <Image src="/sun.png" alt="" width={14} height={14} />
+      <Image src="/moon.png" alt="Moon icon" width={14} height={14} />
+      <div className={`${styles.ball} ${theme === "dark" ? styles.darkBall : styles.lightBall}`} />
+      <Image src="/sun.png" alt="Sun icon" width={14} height={14} />
     </div>
   );
 };
