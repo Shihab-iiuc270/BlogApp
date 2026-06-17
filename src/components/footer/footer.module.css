@@ -20,7 +20,11 @@
   align-items: center;
   gap: 12px;
 }
-
+.logoImage{
+  border-radius:8px;
+  border:1px solid rgba(15,23,42,.12);
+  background-color:black;
+}
 .logoText {
   font-size: 26px;
   font-weight: 700;

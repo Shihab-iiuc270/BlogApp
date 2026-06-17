@@ -127,20 +127,27 @@ const WritePage = () => {
 
   return (
     <div className={styles.container}>
+      <div className={styles.header}>
+        <h1>Create New Post</h1>
+        <p>Share your thoughts with the world</p>
+      </div>
       <input
         type="text"
-        placeholder="Title"
+        placeholder="Enter your title..."
         className={styles.input}
         onChange={(e) => setTitle(e.target.value)}
       />
-      <select className={styles.select} onChange={(e) => setCatSlug(e.target.value)}>
-        <option value="style">style</option>
-        <option value="fashion">fashion</option>
-        <option value="food">food</option>
-        <option value="culture">culture</option>
-        <option value="travel">travel</option>
-        <option value="coding">coding</option>
-      </select>
+      <div className={styles.controls}>
+        <select className={styles.select} onChange={(e) => setCatSlug(e.target.value)}>
+          <option value="">Select a category</option>
+          <option value="style">Style</option>
+          <option value="fashion">Fashion</option>
+          <option value="food">Food</option>
+          <option value="culture">Culture</option>
+          <option value="travel">Travel</option>
+          <option value="coding">Coding</option>
+        </select>
+      </div>
 
       {/* Image Preview Section */}
       {media && (
@@ -174,9 +181,11 @@ const WritePage = () => {
       )}
 
       <div className={styles.editor}>
-        <button className={styles.button} onClick={() => setOpen(!open)}>
-          <Image src="/plus.png" alt="" width={16} height={16} />
-        </button>
+        <div className={styles.toolbar}>
+          <button className={styles.button} onClick={() => setOpen(!open)}>
+            <Image src="/plus.png" alt="Add media" width={18} height={18} />
+          </button>
+        </div>
         {open && (
           <div className={styles.add}>
             <input
@@ -207,9 +216,14 @@ const WritePage = () => {
           placeholder="Tell your story..."
         />
       </div>
-      <button className={styles.publish} onClick={handleSubmit} disabled={isUploading}>
-        {isUploading ? "Uploading..." : "Publish"}
-      </button>
+      <div className={styles.footer}>
+        <span className={styles.charCount}>
+          {value.length} characters
+        </span>
+        <button className={styles.publish} onClick={handleSubmit} disabled={isUploading}>
+          {isUploading ? "Publishing..." : "Publish Post"}
+        </button>
+      </div>
     </div>
   );
 };

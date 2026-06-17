@@ -14,7 +14,7 @@
 }
 
 .light {
-  background: rgba(255, 255, 255, 0.92);
+  background: rgba(13, 13, 13, 0.92);
 }
 
 .dark {
@@ -31,7 +31,7 @@
   top: 50%;
   transform: translateY(-50%);
   transition: transform 200ms ease, background 200ms ease;
-  box-shadow: 0 12px 22px rgba(0, 0, 0, 0.14);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
 }
 
 .lightBall {
@@ -40,4 +40,13 @@
 
 .darkBall {
   transform: translateY(-50%) translateX(28px);
+}
+
+.icon {
+  opacity: 1;
+  transition: opacity 200ms ease;
+}
+
+.iconInactive {
+  opacity: 0.3;
 }

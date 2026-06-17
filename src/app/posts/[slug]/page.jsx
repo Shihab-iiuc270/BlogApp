@@ -53,7 +53,7 @@ const SinglePage = async ({ params }) => {
             <Comments postSlug={slug}/>
           </div>
         </div>
-        <Menu />
+        <Menu showEditorial={false} />
       </div>
     </div>
   );

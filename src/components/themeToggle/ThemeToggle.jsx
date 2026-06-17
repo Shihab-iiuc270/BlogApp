@@ -15,9 +15,19 @@ const ThemeToggle = () => {
       aria-label="Toggle theme"
       title="Toggle theme"
     >
-      <Image src="/moon.png" alt="Moon icon" width={14} height={14} />
-      <div className={`${styles.ball} ${theme === "dark" ? styles.darkBall : styles.lightBall}`} />
-      <Image src="/sun.png" alt="Sun icon" width={14} height={14} />
+      {theme === "dark" ? (
+        <>
+          <Image src="/sun.png" alt="Sun icon" width={14} height={14} className={styles.icon} />
+          <div className={`${styles.ball} ${styles.darkBall}`} />
+          <Image src="/moon.png" alt="Moon icon" width={14} height={14} className={`${styles.icon} ${styles.iconInactive}`} />
+        </>
+      ) : (
+        <>
+          <Image src="/sun.png" alt="Sun icon" width={14} height={14} className={`${styles.icon} ${styles.iconInactive}`} />
+          <div className={`${styles.ball} ${styles.lightBall}`} />
+          <Image src="/moon.png" alt="Moon icon" width={14} height={14} className={styles.icon} />
+        </>
+      )}
     </div>
   );
 };

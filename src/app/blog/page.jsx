@@ -8,10 +8,18 @@ const BlogPage = ({ searchParams }) => {
 
   return (
     <div className={styles.container}>
-      <h1 className={styles.title}>{cat} Blog</h1>
+      <h1 className={styles.title}>
+        {cat ? (
+          <>
+            Explore <span>{cat}</span> Posts
+          </>
+        ) : (
+          'All Blog Posts'
+        )}
+      </h1>
       <div className={styles.content}>
         <CardList page={page} cat={cat}/>
-        <Menu />
+        <Menu showEditorial={false} />
       </div>
     </div>
   );

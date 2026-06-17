@@ -2,14 +2,20 @@
   display: flex;
   flex-direction: column;
   gap: 36px;
-  padding: 40px 0;
+  padding: 32px 0;
+  max-width: 1200px;
+  margin: 0 auto;
 }
 
 .infoContainer {
   display: flex;
   align-items: flex-start;
-  gap: 40px;
+  gap: 32px;
   flex-wrap: wrap;
+  background: var(--surface);
+  border-radius: 24px;
+  padding: 32px;
+  box-shadow: var(--shadow);
 }
 
 .textContainer {
@@ -18,24 +24,27 @@
 }
 
 .title {
-  font-size: 48px;
-  line-height: 1.05;
-  margin-bottom: 24px;
+  font-size: 40px;
+  line-height: 1.2;
+  margin-bottom: 20px;
+  color: var(--textColor);
+  font-weight: 800;
 }
 
 .user {
   display: flex;
   align-items: center;
-  gap: 18px;
+  gap: 16px;
   flex-wrap: wrap;
 }
 
 .userImageContainer {
-  width: 58px;
-  height: 58px;
+  width: 52px;
+  height: 52px;
   position: relative;
   border-radius: 50%;
   overflow: hidden;
+  border: 2px solid var(--accentSoft);
 }
 
 .avatar {
@@ -51,18 +60,24 @@
 }
 
 .username {
-  font-size: 18px;
+  font-size: 16px;
   font-weight: 600;
+  color: var(--textColor);
+}
+
+.date {
+  font-size: 13px;
+  color: var(--muted);
 }
 
 .imageContainer {
   flex: 1;
-  min-width: 320px;
-  height: 320px;
+  min-width: 300px;
+  height: 300px;
   position: relative;
-  border-radius: 28px;
+  border-radius: 20px;
   overflow: hidden;
-  box-shadow: var(--shadow);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.12);
 }
 
 .image {
@@ -71,23 +86,106 @@
 
 .content {
   display: flex;
-  gap: 40px;
+  gap: 36px;
   flex-wrap: wrap;
 }
 
 .post {
   flex: 5;
-  margin-top: 0;
+  min-width: 0;
 }
 
 .description {
-  font-size: 18px;
+  font-size: 17px;
   color: var(--softTextColor);
   line-height: 1.8;
+  max-width: 72ch;
 }
 
 .description p {
-  margin-bottom: 22px;
+  margin-bottom: 20px;
+}
+
+.description h1,
+.description h2,
+.description h3 {
+  margin-top: 32px;
+  margin-bottom: 16px;
+  color: var(--textColor);
+  font-weight: 700;
+}
+
+.description h1 {
+  font-size: 32px;
+}
+
+.description h2 {
+  font-size: 26px;
+}
+
+.description h3 {
+  font-size: 20px;
+}
+
+.description strong {
+  color: var(--textColor);
+  font-weight: 600;
+}
+
+.description a {
+  color: var(--accent);
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+
+.description ul,
+.description ol {
+  margin-bottom: 20px;
+  padding-left: 24px;
+}
+
+.description li {
+  margin-bottom: 8px;
+}
+
+.description blockquote {
+  border-left: 4px solid var(--accent);
+  padding-left: 20px;
+  margin: 24px 0;
+  font-style: italic;
+  color: var(--muted);
+}
+
+.description img {
+  border-radius: 12px;
+  margin: 24px 0;
+  max-width: 100%;
+}
+
+.description code {
+  background: var(--softBg);
+  padding: 2px 6px;
+  border-radius: 4px;
+  font-size: 0.9em;
+}
+
+.description pre {
+  background: var(--softBg);
+  padding: 20px;
+  border-radius: 12px;
+  overflow-x: auto;
+  margin: 20px 0;
+}
+
+.description pre code {
+  background: none;
+  padding: 0;
+}
+
+.comment {
+  margin-top: 40px;
+  padding-top: 32px;
+  border-top: 1px solid rgba(128, 128, 128, 0.1);
 }
 
 @media screen and (max-width: 1024px) {
@@ -98,26 +196,35 @@
   .imageContainer {
     width: 100%;
     min-width: auto;
-    display: block;
+    height: 280px;
   }
 }
 
 @media screen and (max-width: 768px) {
+  .container {
+    padding: 24px 16px;
+  }
+
   .title {
-    font-size: 36px;
+    font-size: 30px;
   }
 
   .infoContainer {
-    gap: 24px;
+    padding: 24px;
+    gap: 20px;
+  }
+
+  .description {
+    font-size: 16px;
   }
 }
 
 @media screen and (max-width: 640px) {
   .title {
-    font-size: 30px;
+    font-size: 26px;
   }
 
-  .description {
-    font-size: 16px;
+  .imageContainer {
+    height: 220px;
   }
 }

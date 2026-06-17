@@ -1,69 +1,121 @@
 .container {
-  padding: 24px 0;
+  padding: 20px 0;
 }
 
 .title {
-  margin: 40px 0 24px;
-  font-size: 28px;
+  font-size: 22px;
   font-weight: 700;
+  color: var(--textColor);
+  margin-bottom: 6px;
+}
+
+.description {
+  font-size: 14px;
+  color: var(--muted);
+  margin-bottom: 20px;
+  line-height: 1.5;
 }
 
 .categories {
   display: flex;
-  flex-wrap: wrap;
-  gap: 14px;
+  flex-direction: column;
+  gap: 10px;
 }
 
 .category {
-  display: inline-flex;
-  align-items: center;
-  gap: 12px;
+  display: block;
   text-transform: capitalize;
-  padding: 14px 20px;
-  border-radius: 999px;
-  font-weight: 600;
+  border-radius: 14px;
   color: var(--textColor);
   transition: transform 200ms ease, box-shadow 200ms ease, background 200ms ease;
   background: var(--softBg);
-  box-shadow: 0 18px 40px rgba(15, 23, 42, 0.06);
-  width: auto;
+  box-shadow: 0 2px 8px rgba(15, 23, 42, 0.04);
+  overflow: hidden;
 }
 
 .category:hover {
-  transform: translateY(-2px);
-  background: var(--accentSoft);
+  transform: translateX(4px);
+  box-shadow: 0 4px 16px rgba(15, 23, 42, 0.08);
 }
 
-.category.style {
-  background-color: rgba(87, 196, 255, 0.18);
+.categoryContent {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 14px 18px;
 }
 
-.category.fashion {
-  background-color: rgba(218, 133, 199, 0.14);
-}
-
-.category.food {
-  background-color: rgba(127, 184, 129, 0.18);
-}
-
-.category.travel {
-  background-color: rgba(255, 121, 87, 0.16);
-}
-
-.category.culture {
-  background-color: rgba(255, 176, 79, 0.18);
-}
-
-.category.coding {
-  background-color: rgba(94, 79, 255, 0.18);
+.imageWrapper {
+  width: 36px;
+  height: 36px;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
 }
 
 .image {
-  border-radius: 50%;
+  width: 20px;
+  height: 20px;
+  object-fit: contain;
 }
 
-@media screen and (max-width: 640px) {
-  .category {
-    width: 100%;
+.categoryText {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  flex: 1;
+}
+
+.categoryTitle {
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--textColor);
+}
+
+.categoryDesc {
+  font-size: 12px;
+  color: var(--muted);
+  line-height: 1.4;
+}
+
+.category.style {
+  background: linear-gradient(135deg, rgba(87, 196, 255, 0.12) 0%, rgba(87, 196, 255, 0.04) 100%);
+  border: 1px solid rgba(87, 196, 255, 0.15);
+}
+
+.category.fashion {
+  background: linear-gradient(135deg, rgba(218, 133, 199, 0.12) 0%, rgba(218, 133, 199, 0.04) 100%);
+  border: 1px solid rgba(218, 133, 199, 0.15);
+}
+
+.category.food {
+  background: linear-gradient(135deg, rgba(127, 184, 129, 0.12) 0%, rgba(127, 184, 129, 0.04) 100%);
+  border: 1px solid rgba(127, 184, 129, 0.15);
+}
+
+.category.travel {
+  background: linear-gradient(135deg, rgba(255, 121, 87, 0.12) 0%, rgba(255, 121, 87, 0.04) 100%);
+  border: 1px solid rgba(255, 121, 87, 0.15);
+}
+
+.category.culture {
+  background: linear-gradient(135deg, rgba(255, 176, 79, 0.12) 0%, rgba(255, 176, 79, 0.04) 100%);
+  border: 1px solid rgba(255, 176, 79, 0.15);
+}
+
+.category.coding {
+  background: linear-gradient(135deg, rgba(94, 79, 255, 0.12) 0%, rgba(94, 79, 255, 0.04) 100%);
+  border: 1px solid rgba(94, 79, 255, 0.15);
+}
+
+@media screen and (max-width: 768px) {
+  .categoryDesc {
+    display: none;
+  }
+  
+  .categoryContent {
+    padding: 12px 14px;
   }
 }

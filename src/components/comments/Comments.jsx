@@ -20,6 +20,34 @@ const fetcher = async (url) => {
   return data;
 };
 
+// Format date to relative time (e.g., "2 hours ago")
+const formatRelativeTime = (dateString) => {
+  const date = new Date(dateString);
+  const now = new Date();
+  const diffInSeconds = Math.floor((now - date) / 1000);
+
+  if (diffInSeconds < 60) return "Just now";
+  if (diffInSeconds < 3600) {
+    const mins = Math.floor(diffInSeconds / 60);
+    return `${mins} ${mins === 1 ? 'minute' : 'minutes'} ago`;
+  }
+  if (diffInSeconds < 86400) {
+    const hours = Math.floor(diffInSeconds / 3600);
+    return `${hours} ${hours === 1 ? 'hour' : 'hours'} ago`;
+  }
+  if (diffInSeconds < 604800) {
+    const days = Math.floor(diffInSeconds / 86400);
+    return `${days} ${days === 1 ? 'day' : 'days'} ago`;
+  }
+
+  // For older comments, show formatted date
+  return date.toLocaleDateString('en-US', {
+    year: 'numeric',
+    month: 'short',
+    day: 'numeric'
+  });
+};
+
 const Comments = ({ postSlug }) => {
   const { status } = useSession();
 
@@ -36,6 +64,7 @@ const Comments = ({ postSlug }) => {
       body: JSON.stringify({ desc, postSlug }),
     });
     mutate();
+    setDesc("");
   };
 
   return (
@@ -44,40 +73,44 @@ const Comments = ({ postSlug }) => {
       {status === "authenticated" ? (
         <div className={styles.write}>
           <textarea
-            placeholder="write a comment..."
+            placeholder="Write a comment..."
             className={styles.input}
             onChange={(e) => setDesc(e.target.value)}
+            value={desc}
           />
-          <button className={styles.button} onClick={handleSubmit}>
-            Send
+          <button className={styles.button} onClick={handleSubmit} disabled={!desc.trim()}>
+            Post Comment
           </button>
         </div>
       ) : (
-        <Link href="/login">Login to write a comment</Link>
+        <Link href="/login" className={styles.loginLink}>Login to write a comment</Link>
       )}
       <div className={styles.comments}>
         {isLoading
-          ? "loading"
-          : data?.map((item) => (
-              <div className={styles.comment} key={item._id}>
-                <div className={styles.user}>
-                  {item?.user?.image && (
-                    <Image
-                      src={item.user.image}
-                      alt=""
-                      width={50}
-                      height={50}
-                      className={styles.image}
-                    />
-                  )}
-                  <div className={styles.userInfo}>
-                    <span className={styles.username}>{item.user.name}</span>
-                    <span className={styles.date}>{item.createdAt}</span>
+          ? <span className={styles.loading}>Loading comments...</span>
+          : data?.length === 0
+            ? <span className={styles.noComments}>No comments yet. Be the first to comment!</span>
+            : data?.map((item) => (
+                <div className={styles.comment} key={item._id}>
+                  <div className={styles.user}>
+                    {item?.user?.image && (
+                      <div className={styles.userImage}>
+                        <Image
+                          src={item.user.image}
+                          alt={item.user.name}
+                          fill
+                          className={styles.image}
+                        />
+                      </div>
+                    )}
+                    <div className={styles.userInfo}>
+                      <span className={styles.username}>{item.user.name}</span>
+                      <span className={styles.date}>{formatRelativeTime(item.createdAt)}</span>
+                    </div>
                   </div>
+                  <p className={styles.desc}>{item.desc}</p>
                 </div>
-                <p className={styles.desc}>{item.desc}</p>
-              </div>
-            ))}
+              ))}
       </div>
     </div>
   );
