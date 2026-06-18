@@ -37,11 +37,11 @@ const CategoryList = async () => {
         {data?.map((item) => (
           <Link
             href={`/blog?cat=${item.slug}`}
-            className={`${styles.category} ${styles[item.slug]}`}
-            key={item._id}
+            className={`${styles.category} ${styles[item.slug] || ""}`}
+            key={item.id || item.slug}
           >
-            <div className={styles.categoryContent}>
-              {item.img && (
+            <div className={styles.categoryContent}> 
+               {/* {item.img && (
                 <div className={styles.imageWrapper}>
                   <Image
                     src={item.img}
@@ -51,7 +51,7 @@ const CategoryList = async () => {
                     className={styles.image}
                   />
                 </div>
-              )}
+               )} */}
               <div className={styles.categoryText}>
                 <span className={styles.categoryTitle}>{item.title}</span>
                 <span className={styles.categoryDesc}>

@@ -41,7 +41,7 @@ const ContactPage = () => {
         <h1 className={styles.title}>Get in Touch</h1>
         <p className={styles.subtitle}>
           Have a question, suggestion, or just want to say hello? 
-          We'd love to hear from you.
+          We&apos;d love to hear from you.
         </p>
       </div>
 
@@ -122,7 +122,7 @@ const ContactPage = () => {
 
             {status === "success" && (
               <div className={styles.successMessage}>
-                Thank you! Your message has been sent successfully. We'll get back to you soon.
+                Thank you! Your message has been sent successfully. We&apos;ll get back to you soon.
               </div>
             )}
           </form>

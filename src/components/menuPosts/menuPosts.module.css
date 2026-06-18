@@ -52,6 +52,7 @@
   color: white;
   width: max-content;
   text-transform: capitalize;
+  background: linear-gradient(135deg, var(--accent) 0%, #1e40af 100%);
 }
 
 .category.travel {

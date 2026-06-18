@@ -56,20 +56,25 @@
   flex-wrap: wrap;
 }
 
-.select {
+.select,
+.categoryInput {
   padding: 12px 20px;
   font-size: 15px;
   background: var(--softBg);
   border: 2px solid transparent;
   border-radius: 14px;
   color: var(--textColor);
-  cursor: pointer;
   outline: none;
   transition: border-color 200ms ease;
   min-width: 180px;
 }
 
-.select:focus {
+.select {
+  cursor: pointer;
+}
+
+.select:focus,
+.categoryInput:focus {
   border-color: var(--accent);
 }
 
@@ -279,7 +284,8 @@
     align-items: stretch;
   }
 
-  .select {
+  .select,
+  .categoryInput {
     width: 100%;
   }
 }

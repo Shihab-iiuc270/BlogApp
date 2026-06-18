@@ -4,6 +4,7 @@ import Image from 'next/image'
 import Link from 'next/link'
 export default function Card({key,item}) {
   const plainDesc = item.desc ? item.desc.replace(/<[^>]*>/g, "") : "";
+  const categoryTitle = item.cat?.title || item.catSlug;
 
   return (
     <div className={styles.container} key={key}>
@@ -13,7 +14,7 @@ export default function Card({key,item}) {
       <div className={styles.textContainer}>
         <div className={styles.detail}>
             <span className={styles.date}>{item.createdAt.substring(0,10)} - </span>
-            <span className={styles.category}>{item.catSlug}</span>
+            <span className={styles.category}>{categoryTitle}</span>
         </div>
         <Link href={`/posts/${item.slug}` }>
           <h1 className={styles.title}>{item.title}</h1>

@@ -2,54 +2,52 @@ import Image from "next/image";
 import Link from "next/link";
 import React from "react";
 import styles from "./menuPosts.module.css"
+import prisma from "@/utils/connect";
 
-const samplePosts = [
-  {
-    category: "travel",
-    title: "Discover Hidden Gems: Top 10 Unexplored Destinations",
-    author: "Sarah Johnson",
-    date: "Mar 10, 2024",
-  },
-  {
-    category: "culture",
-    title: "The Art of Traditional Storytelling in Modern Times",
-    author: "Michael Chen",
-    date: "Mar 8, 2024",
-  },
-  {
-    category: "food",
-    title: "Street Food Adventures: A Culinary Journey",
-    author: "Emma Williams",
-    date: "Mar 5, 2024",
-  },
-  {
-    category: "fashion",
-    title: "Sustainable Fashion: Style That Cares for Our Planet",
-    author: "Olivia Brown",
-    date: "Mar 3, 2024",
-  },
-];
+const getPosts = async (withImage) => {
+  return prisma.post.findMany({
+    take: 4,
+    orderBy: withImage ? { createdAt: "desc" } : { views: "desc" },
+    include: {
+      cat: true,
+      user: true,
+    },
+  });
+};
 
-const MenuPosts = ({ withImage }) => {
+const formatDate = (date) =>
+  new Intl.DateTimeFormat("en", {
+    month: "short",
+    day: "numeric",
+    year: "numeric",
+  }).format(new Date(date));
+
+const MenuPosts = async ({ withImage }) => {
+  const posts = await getPosts(withImage);
+
+  if (!posts.length) {
+    return null;
+  }
+
   return (
     <div className={styles.items}>
-      {samplePosts.map((post, index) => (
-        <Link href="/blog" className={styles.item} key={index}>
-          {withImage && (
+      {posts.map((post) => (
+        <Link href={`/posts/${post.slug}`} className={styles.item} key={post.id}>
+          {withImage && post.img && (
             <div className={styles.imageContainer}>
-              <Image src="/p1.jpeg" alt="" fill className={styles.image} />
+              <Image src={post.img} alt="" fill className={styles.image} />
             </div>
           )}
           <div className={styles.textContainer}>
-            <span className={`${styles.category} ${styles[post.category]}`}>
-              {post.category}
+            <span className={`${styles.category} ${styles[post.catSlug] || ""}`}>
+              {post.cat?.title || post.catSlug}
             </span>
             <h3 className={styles.postTitle}>
               {post.title}
             </h3>
             <div className={styles.detail}>
-              <span className={styles.username}>{post.author}</span>
-              <span className={styles.date}>{post.date}</span>
+              <span className={styles.username}>{post.user?.name || "Author"}</span>
+              <span className={styles.date}>{formatDate(post.createdAt)}</span>
             </div>
           </div>
         </Link>

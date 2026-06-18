@@ -1,6 +1,7 @@
 "use client";
 
 import Image from "next/image";
+import dynamic from "next/dynamic";
 import styles from "./writePage.module.css";
 import { useEffect, useState } from "react";
 import "react-quill/dist/quill.bubble.css";
@@ -13,7 +14,8 @@ import { useSession } from "next-auth/react";
 //   getDownloadURL,
 // } from "firebase/storage";
 // import { app } from "@/utils/firebase";
-import ReactQuill from "react-quill";
+
+const ReactQuill = dynamic(() => import("react-quill"), { ssr: false });
 
 const WritePage = () => {
   const { status } = useSession();
@@ -24,7 +26,8 @@ const WritePage = () => {
   const [media, setMedia] = useState("");
   const [value, setValue] = useState("");
   const [title, setTitle] = useState("");
-  const [catSlug, setCatSlug] = useState("");
+  const [category, setCategory] = useState("");
+  const [categories, setCategories] = useState([]);
   const [isUploading, setIsUploading] = useState(false);
   const [uploadError, setUploadError] = useState("");
 
@@ -74,6 +77,25 @@ const WritePage = () => {
     }
   }, [file]);
 
+  useEffect(() => {
+    const getCategories = async () => {
+      try {
+        const res = await fetch("/api/categories");
+
+        if (!res.ok) {
+          throw new Error("Failed to load categories");
+        }
+
+        const data = await res.json();
+        setCategories(data);
+      } catch (err) {
+        console.log(err);
+      }
+    };
+
+    getCategories();
+  }, []);
+
   if (status === "loading") {
     return <div className={styles.loading}>Loading...</div>;
   }
@@ -101,15 +123,26 @@ const WritePage = () => {
       return;
     }
 
+    if (!category.trim()) {
+      alert("Please enter a category");
+      return;
+    }
+
+    const categoryTitle = category.trim();
+
     try {
       const res = await fetch("/api/posts", {
         method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
         body: JSON.stringify({
           title,
           desc: value,
           img: media,
           slug: slugify(title),
-          catSlug: catSlug || "style",
+          catSlug: slugify(categoryTitle),
+          categoryTitle,
         }),
       });
 
@@ -138,15 +171,18 @@ const WritePage = () => {
         onChange={(e) => setTitle(e.target.value)}
       />
       <div className={styles.controls}>
-        <select className={styles.select} onChange={(e) => setCatSlug(e.target.value)}>
-          <option value="">Select a category</option>
-          <option value="style">Style</option>
-          <option value="fashion">Fashion</option>
-          <option value="food">Food</option>
-          <option value="culture">Culture</option>
-          <option value="travel">Travel</option>
-          <option value="coding">Coding</option>
-        </select>
+        <input
+          className={styles.categoryInput}
+          list="category-options"
+          placeholder="Category, e.g. Travel"
+          value={category}
+          onChange={(e) => setCategory(e.target.value)}
+        />
+        <datalist id="category-options">
+          {categories.map((item) => (
+            <option value={item.title} key={item.id || item.slug} />
+          ))}
+        </datalist>
       </div>
 
       {/* Image Preview Section */}

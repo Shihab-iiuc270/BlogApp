@@ -26,8 +26,8 @@ const AboutPage = () => {
               it easy for anyone to publish, share, and connect with readers who matter.
             </p>
             <p className={styles.paragraph}>
-              Whether you're passionate about technology, fashion, food, travel, culture, 
-              or coding, you'll find a community of like-minded individuals who share your 
+              Whether you&apos;re passionate about technology, fashion, food, travel, culture, 
+              or coding, you&apos;ll find a community of like-minded individuals who share your 
               interests and enthusiasm.
             </p>
           </div>
