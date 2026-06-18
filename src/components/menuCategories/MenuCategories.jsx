@@ -1,18 +1,14 @@
 import Link from "next/link";
 import React from "react";
 import styles from "./menuCategories.module.css";
-import { getBaseUrl } from "@/utils/getBaseUrl";
+import prisma from "@/utils/connect";
 
 const getData = async () => {
-  const res = await fetch(`${getBaseUrl()}/api/categories`, {
-    cache: "no-store",
+  return prisma.category.findMany({
+    orderBy: {
+      title: "asc",
+    },
   });
-
-  if (!res.ok) {
-    throw new Error("Failed");
-  }
-
-  return res.json();
 };
 
 const MenuCategories = async () => {
