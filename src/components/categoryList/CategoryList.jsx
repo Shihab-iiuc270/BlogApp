@@ -2,6 +2,7 @@ import React from "react";
 import styles from "./categoryList.module.css";
 import Link from "next/link";
 import Image from "next/image";
+import { getBaseUrl } from "@/utils/getBaseUrl";
 
 const categoryDescriptions = {
   style: "Fashion trends, personal style tips, and wardrobe essentials",
@@ -13,7 +14,7 @@ const categoryDescriptions = {
 };
 
 const getData = async () => {
-  const res = await fetch("http://localhost:3000/api/categories", {
+  const res = await fetch(`${getBaseUrl()}/api/categories`, {
     cache: "no-store",
   });
 

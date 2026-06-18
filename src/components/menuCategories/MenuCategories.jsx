@@ -1,9 +1,10 @@
 import Link from "next/link";
 import React from "react";
 import styles from "./menuCategories.module.css";
+import { getBaseUrl } from "@/utils/getBaseUrl";
 
 const getData = async () => {
-  const res = await fetch("http://localhost:3000/api/categories", {
+  const res = await fetch(`${getBaseUrl()}/api/categories`, {
     cache: "no-store",
   });
 
