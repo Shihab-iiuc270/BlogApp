@@ -1,12 +1,30 @@
-import { PrismaClient } from '@prisma/client'
-let prisma
-if (process.env.NODE_ENV === 'production') {
-  prisma = new PrismaClient()
-} else {
-  if (!global.prisma) {
-    global.prisma = new PrismaClient()
-  }
-  prisma = global.prisma
-}
+import { PrismaClient } from "@prisma/client";
 
-export default prisma
+const globalForPrisma = globalThis;
+
+const getPrisma = () => {
+  if (process.env.NODE_ENV === "production") {
+    if (!globalForPrisma.prisma) {
+      globalForPrisma.prisma = new PrismaClient();
+    }
+
+    return globalForPrisma.prisma;
+  }
+
+  if (!globalForPrisma.prisma) {
+    globalForPrisma.prisma = new PrismaClient();
+  }
+
+  return globalForPrisma.prisma;
+};
+
+const prisma = new Proxy(
+  {},
+  {
+    get(_target, prop) {
+      return getPrisma()[prop];
+    },
+  }
+);
+
+export default prisma;

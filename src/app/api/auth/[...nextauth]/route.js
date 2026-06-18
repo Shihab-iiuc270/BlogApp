@@ -2,6 +2,7 @@ import { authOptions } from "@/utils/auth";
 import NextAuth from "next-auth";
 
 export const dynamic = "force-dynamic";
+export const runtime = "nodejs";
 
 const handler = NextAuth(authOptions);
 
